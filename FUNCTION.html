@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NOOR MODS</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0a0a0f;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+    }
+
+    .panel {
+      background: #1c1c1c;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #00f0ff, 0 0 30px #ff00ff, 0 0 40px #00ff00;
+      width: 350px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff;
+    }
+
+    .function-btn {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #00ffff, #ff00ff, #00ff00);
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ffff;
+      transition: 0.3s;
+    }
+
+    .function-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .status {
+      margin-bottom: 10px;
+      font-size: 14px;
+      text-shadow: 0 0 5px #ff0;
+    }
+
+    .apply-btn {
+      background: linear-gradient(90deg, #00ff00, #00ffff, #ff00ff);
+      color: white;
+      border: none;
+      padding: 14px;
+      margin-top: 20px;
+      font-size: 18px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #00ff00;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .apply-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #00ffcc;
+      color: #000;
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00ffff;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 999;
+    }
+
+    .notification.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="panel">
+    <h2>NOOR MODS</h2>
+
+    <button class="function-btn" onclick="toggle('aimbot')">AIMBOT</button>
+    <div class="status" id="aimbot-status">Status: OFF</div>
+
+    <button class="function-btn" onclick="toggle('aimlock')">AIMLOCK</button>
+    <div class="status" id="aimlock-status">Status: OFF</div>
+
+    <button class="function-btn" onclick="toggle('norecoil')">NO RECOIL</button>
+    <div class="status" id="norecoil-status">Status: OFF</div>
+
+    <button class="function-btn" onclick="toggle('aimhead')">AIMHEAD</button>
+    <div class="status" id="aimhead-status">Status: OFF</div>
+
+    <button class="apply-btn" onclick="applyChanges()">BACKUP & APPLY</button>
+  </div>
+
+  <div class="notification" id="notify">Functions Applied Successfully!</div>
+
+  <script>
+    const states = {
+      aimbot: false,
+      aimlock: false,
+      norecoil: false,
+      aimhead: false
+    };
+
+    function toggle(func) {
+      states[func] = !states[func];
+      document.getElementById(`${func}-status`).textContent =
+        `Status: ${states[func] ? 'ON' : 'OFF'}`;
+    }
+
+    function applyChanges() {
+      const allOn = Object.values(states).every(val => val === true);
+      const notify = document.getElementById("notify");
+
+      if (allOn) {
+        notify.textContent = "✅ All functions applied to storage!";
+        notify.classList.add("show");
+        setTimeout(() => notify.classList.remove("show"), 3000);
+      } else {
+        notify.textContent = "⚠️ Please turn ON all functions before applying.";
+        notify.classList.add("show");
+        setTimeout(() => notify.classList.remove("show"), 3000);
+      }
+    }
+  </script>
+
+</body>
+</html>
